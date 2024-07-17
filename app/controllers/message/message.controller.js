@@ -1,6 +1,6 @@
-const prisma = require('../../config/db');
+import prisma from '../../../prisma/client.js'
 
-exports.getMessages = async (req, res) => {
+export const getMessages = async (req, res) => {
     try {
         const messages = await prisma.message.findMany({
             where: {
@@ -13,7 +13,7 @@ exports.getMessages = async (req, res) => {
     }
 };
 
-exports.sendMessage = async (req, res) => {
+export const sendMessages = async (req, res) => {
     const { content, receiverId } = req.body;
     try {
         const message = await prisma.message.create({

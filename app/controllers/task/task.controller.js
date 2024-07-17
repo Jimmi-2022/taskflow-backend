@@ -1,6 +1,6 @@
-const prisma = require('../../config/db');
+import prisma from '../../../prisma/client.js'
 
-exports.getTasks = async (req, res) => {
+export const getTasks = async (req, res) => {
     try {
         const tasks = await prisma.task.findMany({
             where: { userId: req.user.id },
@@ -11,7 +11,7 @@ exports.getTasks = async (req, res) => {
     }
 };
 
-exports.createTask = async (req, res) => {
+export const  createTask = async (req, res) => {
     const { title, description } = req.body;
     try {
         const task = await prisma.task.create({
@@ -27,7 +27,7 @@ exports.createTask = async (req, res) => {
     }
 };
 
-exports.updateTask = async (req, res) => {
+export const updateTask = async (req, res) => {
     const { title, description, status } = req.body;
     try {
         let task = await prisma.task.findUnique({
@@ -46,7 +46,7 @@ exports.updateTask = async (req, res) => {
     }
 };
 
-exports.deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
     try {
         await prisma.task.delete({
             where: { id: parseInt(req.params.id) },

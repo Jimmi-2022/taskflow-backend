@@ -7,6 +7,8 @@ import messageRoutes from "./app/routes/message/message.routes.js";
 import projectRoutes from "./app/routes/projects/projects.routes.js";
 import taskRoutes from "./app/routes/tasks/tasks.routes.js";
 import teamsRoutes from "./app/routes/teams/teams.routes.js";
+import activityRoutes from "./app/routes/acivity/activity.routes.js";
+import scheduleRoutes from "./app/routes/schedule/schedule.routes.js";
 
 // Загружаем переменные окружения из .env файла
 dotenv.config()
@@ -35,6 +37,10 @@ const startServer = async () => {
     app.use('/api/tasks', taskRoutes)
     // Подключение маршрутов команд
     app.use('/api/teams', teamsRoutes)
+    // Подключение маршрутов активности
+    app.use('/api/activity', activityRoutes)
+    // Подключение маршрутов для событий
+    app.use('/api/schedule', scheduleRoutes)
 
     app.listen(port, () => {
         console.log(chalk.green(`Server running at http://localhost:${port}`))

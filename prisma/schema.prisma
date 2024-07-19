@@ -75,6 +75,7 @@ model Activity {
   userId      Int
   user        User     @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Team {
@@ -83,14 +84,18 @@ model Team {
   description String?
   members     UserTeam[]
   createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model UserTeam {
-  userId Int
-  teamId Int
-  user   User @relation(fields: [userId], references: [id])
-  team   Team @relation(fields: [teamId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  teamId    Int
+  role      String   @default("member")
+  user      User     @relation(fields: [userId], references: [id])
+  team      Team     @relation(fields: [teamId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@id([userId, teamId])
+  @@unique([userId, teamId])
 }

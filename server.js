@@ -2,6 +2,11 @@ import express from 'express'
 import dotenv from 'dotenv'
 import chalk from 'chalk'
 import authRoutes from './app/routes/auth/auth.routes.js'
+import usersRoutes from "./app/routes/users/users.routes.js";
+import messageRoutes from "./app/routes/message/message.routes.js";
+import projectRoutes from "./app/routes/projects/projects.routes.js";
+import taskRoutes from "./app/routes/tasks/tasks.routes.js";
+import teamsRoutes from "./app/routes/teams/teams.routes.js";
 
 // Загружаем переменные окружения из .env файла
 dotenv.config()
@@ -20,6 +25,16 @@ const startServer = async () => {
 
     // Маршруты для аутентификации
     app.use('/api/auth', authRoutes)
+    // Подключение маршрутов пользователей
+    app.use('/api/users', usersRoutes)
+    // Подключение сообщений
+    app.use('/api/messages', messageRoutes)
+    // Подключение маршрутов проектов
+    app.use('/api/projects', projectRoutes)
+    // Подключение маршрутов задач
+    app.use('/api/tasks', taskRoutes)
+    // Подключение маршрутов команд
+    app.use('/api/teams', teamsRoutes)
 
     app.listen(port, () => {
         console.log(chalk.green(`Server running at http://localhost:${port}`))
